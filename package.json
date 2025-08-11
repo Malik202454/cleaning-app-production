@@ -1,26 +1,33 @@
-{
-  "name": "cleaning-app-production",
-  "version": "1.0.0",
-  "description": "Application de gestion des agents d'entretien - Production",
-  "scripts": {
-    "build": "cd backend && npm install && npm run build && cd ../frontend && npm install && npm run build",
-    "start": "cd backend && npm start",
-    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
-    "railway:build": "cd backend && npm install && npx prisma generate",
-    "railway:start": "cd backend && npm start",
-    "railway:setup": "cd backend && npx prisma db push && npx tsx scripts/smartDailyStartup.ts"
-  },
-  "keywords": [
-    "cleaning",
-    "management",
-    "react",
-    "nodejs",
-    "production",
-    "railway"
-  ],
-  "author": "Cleaning App",
-  "license": "MIT",
-  "engines": {
-    "node": ">=18.0.0"
+  {
+    "name": "cleaning-app-production",
+    "version": "1.0.0",
+    "description": "Application de gestion des agents d'entretien - Production",
+    "scripts": {
+      "build": "npm install && npm run build:backend",
+      "build:backend": "npm run prisma:generate && npm run build:app",
+      "build:app": "npm run build --prefix backend",
+      "start": "npm start --prefix backend",
+      "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+      "prisma:generate": "npx prisma generate --schema=backend/prisma/schema.prisma",
+      "prisma:push": "npx prisma db push --schema=backend/prisma/schema.prisma",
+      "postinstall": "npm install --prefix backend && npm install --prefix frontend"
+    },
+    "keywords": [
+      "cleaning",
+      "management",
+      "react",
+      "nodejs",
+      "production",
+      "railway"
+    ],
+    "author": "Cleaning App",
+    "license": "MIT",
+    "engines": {
+      "node": ">=18.0.0"
+    },
+    "dependencies": {
+      "prisma": "^5.22.0",
+      "@prisma/client": "^5.22.0",
+      "concurrently": "^8.2.0"
+    }
   }
-}
