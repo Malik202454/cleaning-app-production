@@ -4,8 +4,8 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "cd backend && npm install && npm start",
-    "healthcheckPath": "/api/health",
-    "healthcheckTimeout": 300
+    "startCommand": "cd backend && npm install && npx tsx src/index.ts",
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 120
   }
 }
